@@ -1,0 +1,20 @@
+
+move n byte of data from source to destination
+move n byte of data from source to destination
+
+; Initialize the source address, destination address, and coun
+MOV R0, #20H      ; Load the source address 20H into register R0
+MOV R1, #40H      ; Load the destination address 40H into register R1
+MOV R2, #05H      ; Load the count (number of bytes to move) into register R2
+
+; Loop to move each byte
+Back: MOV A, @R0  ; Load the byte at the source address (pointed by R0) into accumulator A
+      MOV @R1, A  ; Store the byte from accumulator A to the destination address (pointed by R1)
+
+      INC R0      ; Increment the source address (pointed by R0) to the next byte
+      INC R1      ; Increment the destination address (pointed by R1) to the next byte
+
+      DJNZ R2, Back ; Decrement the count in R2. If R2 is not zero, jump back to label "Back"
+
+; End of program
+End:  NOP         ; No operation (or any other end-of-program operation)
