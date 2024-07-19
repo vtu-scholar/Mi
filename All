@@ -18,3 +18,21 @@ Back: MOV A, @R0  ; Load the byte at the source address (pointed by R0) into acc
 
 ; End of program
 End:  NOP         ; No operation (or any other end-of-program operation)
+
+move data add 34h
+
+ORG 00H          ; Origin, start of the program
+
+MOV R0, #34H     ; Initialize source memory pointer to 34H
+MOV A, @R0       ; Load the data from source 1 (34H) into accumulator
+MOV R1, A        ; Store the content of A into register R1 (source 1)
+INC R0           ; Increment source memory pointer to 35H
+
+MOV A, @R0       ; Load the data from source 2 (35H) into accumulator
+ADD A, R1        ; Add the content of A and R1 (source 1)
+
+INC NEXT         ; If no carry, skip the next instruction
+INC R6           ; Increment the value of R6 (MSB) if carry is generated
+
+NEXT: MOV R5, A  ; Store the content of A into R5 (LSB)
+END
