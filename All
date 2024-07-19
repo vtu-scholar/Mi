@@ -21,6 +21,8 @@ End:  NOP         ; No operation (or any other end-of-program operation)
 
 move data add 34h
 
+seperate positive and negative numbers
+
 ORG 00H          ; Origin, start of the program
 
 MOV R0, #34H     ; Initialize source memory pointer to 34H
@@ -35,4 +37,21 @@ INC NEXT         ; If no carry, skip the next instruction
 INC R6           ; Increment the value of R6 (MSB) if carry is generated
 
 NEXT: MOV R5, A  ; Store the content of A into R5 (LSB)
+END
+
+ORG 00H           ; Origin, start of the program
+
+MOV R0, #30H      ; Initialize source memory pointer to 30H
+MOV R1, #50H      ; Initialize destination memory pointer to 50H
+MOV R2, #05       ; Initialize iteration counter to 5
+
+BACK: MOV A, @R0  ; Load the data from source and load to accumulator
+JB ACC.7, SKIP    ; Jump to SKIP if the 7th bit (sign bit) is set (negative number)
+MOV @R1, A        ; Store the data into destination memory pointer
+INC R1            ; Increment destination memory pointer
+
+SKIP: INC R0      ; Increment source memory pointer
+DJNZ R2, BACK     ; Decrement iteration count & if not 0, repeat
+LI: SJMP LI       ; Loop infinitely after completion
+
 END
