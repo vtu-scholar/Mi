@@ -1,0 +1,36 @@
+# Install pyDatalog before running:
+# pip install pyDatalog
+
+from pyDatalog import pyDatalog
+
+# Clear any previous data
+pyDatalog.clear()
+
+# Declare terms (variables and predicates)
+pyDatalog.create_terms('X, Y, Z, parent, ancestor, employed, unemployed')
+
+# Define parent relationships (facts)
++parent('John', 'Mary')
++parent('Mary', 'Alice')
++parent('Alice', 'Bob')
+
+# Define employed individuals (facts)
++employed('Mary')
++employed('Alice')
+
+# Define rules for ancestor
+ancestor(X, Y) <= parent(X, Y)
+ancestor(X, Y) <= parent(X, Z) & ancestor(Z, Y)
+
+# Define rule for unemployment
+unemployed(X) <= ~employed(X)
+
+# Output queries
+print("Ancestors of Bob:", ancestor(X, 'Bob'))
+print("Ancestors of Mary:", ancestor(X, 'Mary'))
+print("Ancestors of Alice:", ancestor(X, 'Alice'))
+
+print("Is Alice employed?", "Yes" if employed('Alice') else "No")
+
+print("All employed individuals:", employed(X))
+print("All unemployed individuals:", unemployed(X))
