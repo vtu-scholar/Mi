@@ -1,0 +1,45 @@
+# Import required libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+
+# Function to train and plot Decision Tree for a logic gate
+def train_decision_tree(x, y, gate_name):
+    # Feature names
+    feature_names = ['A', 'B']
+    
+    # Class labels
+    class_names = ['0', '1']
+    
+    # Create Decision Tree Classifier with entropy criterion
+    clf = DecisionTreeClassifier(criterion='entropy')
+    
+    # Train the classifier
+    clf.fit(x, y)
+    
+    # Plot the decision tree
+    plt.figure(figsize=(8, 6))
+    plot_tree(clf, feature_names=feature_names, class_names=class_names,
+              filled=True, rounded=True)
+    plt.title(f"Decision Tree for {gate_name} Gate")
+    plt.show()
+
+# Input data (truth table for 2-input logic gates)
+x = np.array([
+    [0, 0],
+    [0, 1],
+    [1, 0],
+    [1, 1]
+])
+
+# Output for AND gate
+y_and = np.array([0, 0, 0, 1])
+
+# Output for OR gate
+y_or = np.array([0, 1, 1, 1])
+
+# Train and visualize decision tree for AND gate
+train_decision_tree(x, y_and, "AND")
+
+# Train and visualize decision tree for OR gate
+train_decision_tree(x, y_or, "OR")
