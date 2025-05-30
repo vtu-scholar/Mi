@@ -1,0 +1,36 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import confusion_matrix, accuracy_score
+
+iris = datasets.load_iris()
+x, y = iris.data, iris.target
+species_map = {0: 'setosa', 1: 'versicolor', 2: 'virginica'}
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+svm_model = SVC(kernel='linear')
+svm_model.fit(x_train, y_train)
+y_pred = svm_model.predict(x_test)
+
+cm = confusion_matrix(y_test, y_pred)
+
+plt.figure(figsize=(8,6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=species_map.values(),
+            yticklabels=species_map.values())
+plt.title("Confusion Matrix")
+plt.xlabel("Predicted Label")
+plt.ylabel("True Label")
+plt.show()
+
+classified_counts = np.sum(cm, axis=1)
+plt.figure(figsize=(8,6))
+plt.bar(species_map.values(), classified_counts, color=['blue', 'orange', 'green'])
+plt.xlabel("Species")
+plt.ylabel("Number of Samples Classified")
+plt.title("Number of Samples Classified per Class")
+plt.show()
