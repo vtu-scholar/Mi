@@ -24,4 +24,4 @@ puzzle3=([1,2,0,
 
 print("Puzzle 1 solvable:", is_solvable(puzzle1))
 print("Puzzle 2 solvable:", is_solvable(puzzle2))
-print("puzzle3 is solveable",is_soluable(puzzle3))
+print("puzzle 3  solveable",is_soluable(puzzle3))
