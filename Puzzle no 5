@@ -1,6 +1,5 @@
-# Function to count inversions in a puzzle state
 def count_inversions(puzzle):
-    arr = [tile for tile in puzzle if tile != 0]  # remove the blank (0)
+    arr = [tile for tile in puzzle if tile != 0]  
     inversions = 0
     for i in range(len(arr)):
         for j in range(i + 1, len(arr)):
@@ -8,20 +7,20 @@ def count_inversions(puzzle):
                 inversions += 1
     return inversions
 
-# Function to check if puzzle is solvable
 def is_solvable(puzzle):
     inv_count = count_inversions(puzzle)
     return inv_count % 2 == 0
 
-# Example puzzle inputs
 puzzle1 = [1, 2, 3,
            4, 5, 6,
-           7, 8, 0]  # Solvable
+           7, 8, 0]  
 
 puzzle2 = [1, 2, 3,
            4, 6, 5,
-           7, 8, 0]  # Not solvable (inversion count is odd)
+           7, 8, 0] 
+puzzle3=([1,2,0,
+          3,4,5,
+           6,7,8])
 
-# Output results
 print("Puzzle 1 solvable:", is_solvable(puzzle1))
 print("Puzzle 2 solvable:", is_solvable(puzzle2))
