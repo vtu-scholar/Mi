@@ -1,24 +1,11 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-
-# Input values (truth table for AND/OR gates)
-x = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-
-# Output values for AND gate: only 1 AND 1 = 1, else 0
-y = np.array([0, 0, 0, 1])   # Change to [0, 1, 1, 1] for OR gate
-
-# Feature names for input
-featurenames = ['A', 'B']
-
-# Create Decision Tree Classifier using entropy (information gain)
-clf = DecisionTreeClassifier(criterion='entropy')
-
-# Fit model to data
-clf.fit(x, y)
-
-# Plotting the tree
-plt.figure(figsize=(8, 6))
-plot_tree(clf, feature_names=featurenames, class_names=['0', '1'], filled=True, rounded=True)
-plt.title('Decision Tree for AND gate')  # Change title for OR gate
+import matplotlib. pyplot as plt
+from sklearn.tree import DecisionTreeClassifier,plot_tree
+x=np.array([[0,0],[0,1],[1,0],[1,1]])
+y=np.array([0,1,1,1])
+fnames=['a','b']
+clf=DecisionTreeClassifier(criterion='entropy')
+clf.fit(x,y)
+plt.figure(figsize=(8,6))
+plot_tree(clf,feature_names=fnames,class_names=['0','1'],filled=True,rounded=True)
 plt.show()
